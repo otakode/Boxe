@@ -72,7 +72,9 @@ public class PlayerInput : MonoBehaviour
 		if (this.pp.QueryFaceID(0, out faceID, out timestamp) &&
 		    this.pp.QueryFaceLocationData(faceID, out face))
 		{
-			this.Head.transform.position = new Vector3(1.3f - (face.rectangle.x) / 200f, 1f - (face.rectangle.y) / 200f, this.Head.transform.position.z);
+			this.Head.transform.position = new Vector3(1f - (face.rectangle.x) / 250f,
+			                                           0.8f - (face.rectangle.y) / 250f,
+			                                           this.Head.transform.position.z);
 		}
 		else
 		{
