@@ -61,7 +61,9 @@ public class PlayerInput : MonoBehaviour
 
 	void UpdateFist(PXCMGesture.GeoNode fist, GameObject glove)
 	{
-		glove.transform.position = new Vector3(-fist.positionWorld.x * 2, fist.positionWorld.z * 2, -fist.positionWorld.y * 2);
+		Vector3 newPos = new Vector3(-fist.positionWorld.x * 2, fist.positionWorld.z * 2, -fist.positionWorld.y * 2);
+		SmoothPosition(glove.transform.position, ref newPos);
+		glove.transform.position = newPos;
 	}
 
 	void UpdateHead()
@@ -72,13 +74,21 @@ public class PlayerInput : MonoBehaviour
 		if (this.pp.QueryFaceID(0, out faceID, out timestamp) &&
 		    this.pp.QueryFaceLocationData(faceID, out face))
 		{
-			this.Head.transform.position = new Vector3(1f - (face.rectangle.x) / 250f,
-			                                           0.8f - (face.rectangle.y) / 250f,
-			                                           this.Head.transform.position.z);
+			Vector3 newPos = new Vector3(1f - (face.rectangle.x) / 250f,
+			                             0.8f - (face.rectangle.y) / 250f,
+			                             this.Head.transform.position.z);
+			this.SmoothPosition(this.Head.transform.position, ref newPos);
+			newPos = new Vector3(Mathf.Clamp(newPos.x, -0.25f, 0.25f), Mathf.Clamp(newPos.y, -0.15f, 0.15f), newPos.z);
+			this.Head.transform.position = newPos;
 		}
 		else
 		{
 			// place head between and behind the fists
 		}
+	}
+
+	void SmoothPosition(Vector3 last, ref Vector3 next)
+	{
+		next = next + 0.3f * (last - next);
 	}
 }
