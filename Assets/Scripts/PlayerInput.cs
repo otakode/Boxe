@@ -78,7 +78,7 @@ public class PlayerInput : MonoBehaviour
 			                             0.8f - (face.rectangle.y) / 250f,
 			                             this.Head.transform.position.z);
 			this.SmoothPosition(this.Head.transform.position, ref newPos);
-			newPos = new Vector3(Mathf.Clamp(newPos.x, -0.25f, 0.25f), Mathf.Clamp(newPos.y, -0.15f, 0.15f), newPos.z);
+			newPos = new Vector3(Mathf.Clamp(newPos.x, -0.3f, 0.3f), Mathf.Clamp(newPos.y, -0.15f, 0.15f), newPos.z);
 			this.Head.transform.position = newPos;
 		}
 		else
