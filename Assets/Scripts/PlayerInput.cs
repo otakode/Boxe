@@ -89,6 +89,7 @@ public class PlayerInput : MonoBehaviour
 
 	void SmoothPosition(Vector3 last, ref Vector3 next)
 	{
-		next = next + 0.3f * (last - next);
+		next.x = (next.x * 0.9f) + (last.x - next.x) * 0.1f;
+		next.y = (next.y * 0.9f) + (last.y - next.y) * 0.1f;
 	}
 }
